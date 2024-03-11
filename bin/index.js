@@ -1,6 +1,16 @@
 #!/usr/bin/env node
-const fs = require('fs');
+const fs = require('fs').promises;
 const path = require('path');
+const { execSync } = require('child_process');
+
+const packageJsonContent = 
+`{
+  "name": "my-lek-studio-project",
+  "description": "lek-studio-project",
+  "dependencies": {
+    "lek-studios-kernel": "^2.0.8"
+  }
+}`;
 
 const kernelJsContent =
 `const lekStudioKernel = require('lek-studios-kernel');
@@ -43,10 +53,23 @@ const path = require('path');
   console.log('your creation has been successfully exported')
 })();`;
 
-fs.writeFile(path.resolve(process.cwd(), '.gitignore'), 'node_modules', () => {});
-fs.writeFile(path.resolve(process.cwd(), 'kernel.js'), kernelJsContent, () => {});
-fs.writeFile(path.resolve(process.cwd(), 'index.js'), indexJsContent, () => {});
-fs.writeFile(path.resolve(process.cwd(), 'previewer.js'), previewerJsContent, () => {});
-fs.writeFile(path.resolve(process.cwd(), 'export.js'), exportJsContent, () => {});
-fs.mkdir(path.resolve(process.cwd(), 'scripts'), () => {});
-fs.mkdir(path.resolve(process.cwd(), 'default_files'), () => {});
+(async () =>
+  {
+    try
+    {
+      await fs.writeFile(path.resolve(process.cwd(), '.gitignore'), 'node_modules');
+      await fs.writeFile(path.resolve(process.cwd(), 'kernel.js'), kernelJsContent);
+      await fs.writeFile(path.resolve(process.cwd(), 'index.js'), indexJsContent);
+      await fs.writeFile(path.resolve(process.cwd(), 'previewer.js'), previewerJsContent);
+      await fs.writeFile(path.resolve(process.cwd(), 'export.js'), exportJsContent);
+      await fs.mkdir(path.resolve(process.cwd(), 'scripts'));
+      await fs.mkdir(path.resolve(process.cwd(), 'default_files'));
+
+      execSync('npm install', { stdio: 'inherit' });
+    }
+    catch (error)
+    {
+      console.error('An error occurred:', error);
+    }
+  }
+)()
