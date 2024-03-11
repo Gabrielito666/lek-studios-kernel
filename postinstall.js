@@ -42,10 +42,10 @@ const path = require('path');
   console.log('your creation has been successfully exported')
 })();`;
 
-fs.writeFile(path.resolve(process.cwd(), '.gitignore'), 'node_modules');
-fs.writeFile(path.resolve(process.cwd(), 'kernel.js'), kernelJsContent);
-fs.writeFile(path.resolve(process.cwd(), 'index.js'), indexJsContent);
-fs.writeFile(path.resolve(process.cwd(), 'previewer.js', previewerJsContent));
-fs.writeFile(path.resolve(process.cwd(), 'export.js', exportJsContent));
-fs.mkdir(path.resolve(process.cwd(), 'scripts'));
-fs.mkdir(path.resolve(process.cwd(), 'default_files'));
+fs.writeFile(path.resolve(process.cwd(), '.gitignore'), 'node_modules', () => {});
+fs.writeFile(path.resolve(process.cwd(), 'kernel.js'), kernelJsContent, () => {});
+fs.writeFile(path.resolve(process.cwd(), 'index.js'), indexJsContent, () => {});
+fs.writeFile(path.resolve(process.cwd(), 'previewer.js', previewerJsContent, () => {}));
+fs.writeFile(path.resolve(process.cwd(), 'export.js', exportJsContent, () => {}));
+fs.mkdir(path.resolve(process.cwd(), 'scripts'), () => {});
+fs.mkdir(path.resolve(process.cwd(), 'default_files'), () => {});
