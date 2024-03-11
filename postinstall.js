@@ -35,8 +35,8 @@ const path = require('path');
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.setContent(html);
-  await page.waitForSelector("#${id}");
-  const div = await page.$("#${id}");
+  await page.waitForSelector("#\${id}");
+  const div = await page.$("#\${id}");
   await div.screenshot({ path: output });
   await browser.close();
   console.log('your creation has been successfully exported')

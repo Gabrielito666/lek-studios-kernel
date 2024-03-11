@@ -1,6 +1,6 @@
 {
   "name": "lek-studios-kernel",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "'kernel for lek-suite'",
   "main": "index.js",
   "scripts": {
